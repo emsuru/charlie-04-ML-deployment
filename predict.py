@@ -105,10 +105,9 @@ def predict(model, X):
     """Make predictions using the preprocessed data and the loaded model."""
     return model.predict(X)
 
-# DEAR USER 1/3: update the 'output_path' to save your predictions with your desired file name
+# update the 'output_path' to save your predictions with your desired file name
 
-
-def save_predictions(predictions, output_path='output_data/predictions_ninel'):
+def save_predictions(predictions, output_path='predictions'):
     """Save the predictions to both CSV and JSON files with prices rounded to 2 decimal points."""
     df = pd.DataFrame(predictions, columns=['PredictedPrice'])
     df['PredictedPrice'] = df['PredictedPrice'].round(2)  # Round to 2 decimal points
@@ -123,16 +122,14 @@ def save_predictions(predictions, output_path='output_data/predictions_ninel'):
     df.to_json(json_output_path, orient='records')
     print(f"Predictions for Random Forest saved to {json_output_path}")
 
-    # DEAR USER 2/3: update the 'new_data_path' to match the name of your new data
 
 if __name__ == "__main__":
+
     # 1. Load and clean the new data (using clean & encode methods from the DataPreprocessor class)
+    new_data_path = 'newdata.csv' # careful, make sure there's a csv available
+    cleaned_new_data = clean_newdata(new_data_path) # careful, update def clean_newdata to accept path, if running predict directly
 
-    # new_data_path = 'input_data/newdata_ninel.csv' # if newdata is csv
-    new_data_path = 'input_data/newdata_ninel.json' # if newdata is json
-    cleaned_new_data = clean_newdata(new_data_path)
-
-    # 2. Load the preprocessing objects (that were saved during training, when running Preprocessor)
+    # 2. Load the preprocessing objects
     preprocessor_paths = {
         'onehotencoder': 'preprocessing/onehotencoder.pkl',
         'num_imputer': 'preprocessing/num_imputer.pkl',
@@ -140,10 +137,8 @@ if __name__ == "__main__":
     }
     preprocessed_new_data = preprocess_newdata(cleaned_new_data, preprocessor_paths)
 
-    # DEAR USER 3/3: update the 'model_path' with the saved model you want to use for your predictions
-
-    # 3. Load the model (that was saved during training, when running any model in models/ directory, e.g. RandomForest)
-    model_path = 'saved_models/random_forest_model.pkl'
+    # 3. Load the model
+    model_path = 'random_forest_model.pkl'
     model = load_model(model_path)
 
     # 4. Make & save predictions

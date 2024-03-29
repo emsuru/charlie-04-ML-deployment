@@ -18,6 +18,12 @@ from predict import load_preprocessor, load_model, clean_newdata, preprocess_new
 
 app = FastAPI()
 
+# Set port to the env variable PORT to make it easy to choose the port on the server
+# If the Port env variable is not set, use port 8000
+PORT = os.environ.get("PORT", 8000)
+app = FastAPI(port=PORT)
+
+
 # Defines a class named 'Property' which inherits from BaseModel (a class from the Pydantic library that provides data validation and parsing functionality)
 # The class 'Property' has attributes that correspond to the expected input data for the model.
 # Each attribute has a type annotation (e.g. int, str, float) and can have additional validation rules.
@@ -59,11 +65,6 @@ class Property(BaseModel):
     fl_double_glazing: Optional[int] = None
     cadastral_income: Optional[float] = None
 
-# Set port to the env variable PORT to make it easy to choose the port on the server
-# If the Port env variable is not set, use port 8000
-PORT = os.environ.get("PORT", 8000)
-app = FastAPI(port=PORT)
-
 
 @app.get("/")
 async def root():
@@ -85,7 +86,7 @@ def predict(property: Property):
         }
         cleaned_data = clean_newdata(property.model_dump())
         preprocessed_data = preprocess_newdata(cleaned_data, preprocessor_paths)
-        model = load_model('saved_models/random_forest_model.pkl')  # Adjust path as necessary
+        model = load_model('random_forest_model.pkl')  # Adjust path as necessary
         predictions = predict_function(model, preprocessed_data)
         logging.info(f"Predictions type: {type(predictions)}, value: {predictions}")
         # Extract the first element from the numpy array and convert it to a native Python type (float).
