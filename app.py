@@ -26,19 +26,23 @@ class Property(BaseModel):
     #Property model fields with default values
     id: Optional[int] = None
     price: Optional[int] = None
-    property_type: str = Field(None, pattern="^(HOUSE|APARTMENT)$")
+    # property_type: str = Field(None, pattern="^(HOUSE|APARTMENT)$")
+    property_type: str = Field(pattern="^(HOUSE|APARTMENT)$", description="Type of the property: HOUSE or APARTMENT")
     subproperty_type: Optional[str] = None
-    region: str = Field(None, pattern="^(Flanders|Wallonia|Brussels-Capital)$")
+    ## region: str = Field(None, pattern="^(Flanders|Wallonia|Brussels-Capital)$")
+    region: str = Field(pattern="^(Flanders|Wallonia|Brussels-Capital)$", description="Region of the property: Flanders, Wallonia, or Brussels-Capital")
     province: Optional[str] = None
     locality: Optional[str] = None
     zip_code: Optional[int] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     construction_year: Optional[float] = None
-    total_area_sqm: float = Field(..., gt=0, lt=501)
+    # total_area_sqm: float = Field(..., gt=0, lt=501)
+    total_area_sqm: float = Field(..., gt=0, lt=501, description="Total area in square meters: must be greater than 0 and less than 501")
     surface_land_sqm: Optional[float] = None
     nbr_frontages: Optional[float] = None
-    nbr_bedrooms: int = Field(..., ge=1, le=7)
+    # nbr_bedrooms: int = Field(..., ge=1, le=7)
+    nbr_bedrooms: int = Field(..., ge=1, le=7, description="Number of bedrooms: must be at least 1 and no more than 7")
     equipped_kitchen: Optional[str] = None
     fl_furnished: Optional[int] = None
     fl_open_fire: Optional[int] = None
