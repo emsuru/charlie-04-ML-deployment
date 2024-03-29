@@ -1,5 +1,7 @@
-#This code defines a basic FastAPI app with a root endpoint that returns "alive"
-# and a /predict endpoint expecting property data and returning a real prediction or mock prediction.
+# Description: This script  defines a basic FastAPI app with a root endpoint that returns "alive"
+# and a /predict endpoint expecting property data and returning a real prediction (or mock prediction commented out)
+
+# DISCLAIMER: IT's messy, I kept hitting errors especially on data encoding, will return to it to clean it up
 
 from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
@@ -85,7 +87,7 @@ def predict(property: Property):
         # Extract the first element from the numpy array and convert it to a native Python type (float).
         prediction_value = float(predictions[0])
         # save_predictions(predictions, 'path/to/save/predictions')  # Optionally save predictions if needed
-         # Now, you can safely pass this value to jsonable_encoder, though it's not strictly necessary for simple types.
+         # Now, safely pass this value to jsonable_encoder, though now it's not necessary, but for later if we need to return more than one value
         json_compatible_predictions = jsonable_encoder({"prediction": prediction_value})
         # json_compatible_predictions = jsonable_encoder({"prediction": predictions})
         logging.info(f"JSON-compatible Predictions: {json_compatible_predictions}")

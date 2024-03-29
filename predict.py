@@ -1,3 +1,11 @@
+# Description: This script is used to make predictions on new data using a trained model.
+# The script loads the model and preprocessing objects, cleans and preprocesses the new data, and makes predictions.
+# It's designed to be used in a FastAPI app, where the new data is sent to the /predict endpoint.
+
+# DISCLAIMER: It's messy, I carried it over from the training &e valuation phase,
+#             It has some commented things out as I was testing & fixing on the go, I will return to it to clean it up
+
+
 import pandas as pd
 import json
 import joblib
@@ -54,7 +62,7 @@ def clean_newdata(data):
     preprocessor.clean_drop().clean_impute().encode_state_building().encode_epc()
     # Retrieve the cleaned DataFrame
     cleaned_df = preprocessor.df
-    # #save the cleaned data to a json file
+    # #save the cleaned data to a json file - for testing
     # cleaned_df.to_json('input_data/cleaned_newdata.json', orient='records')
     return cleaned_df
 
@@ -80,8 +88,8 @@ def preprocess_newdata(cleaned_df, preprocessor_paths):
     new_df_encoded_df = pd.DataFrame(new_df_encoded.toarray(), columns=ohe.get_feature_names_out(cat_cols), index=new_df.index)
     new_df = new_df.drop(columns=cat_cols).join(new_df_encoded_df)
 
-    #save the preprocessed data to a csv file
-    new_df.to_csv('input_data/preprocessed_categ_encoding_newdata.csv', index=False)
+    #save the preprocessed data to a csv file - for testing
+    # new_df.to_csv('input_data/preprocessed_categ_encoding_newdata.csv', index=False)
 
     # feature selection based on correlation (this comes from preprocess_feat_select
     # and ensures the new data has the same columns as the model was trained on, filling missing columns with zeros
