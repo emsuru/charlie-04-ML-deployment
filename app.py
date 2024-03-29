@@ -3,7 +3,7 @@
 
 from fastapi import FastAPI, HTTPException
 import os
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 # Import necessary functions from predict.py
@@ -11,41 +11,42 @@ from predict import load_preprocessor, load_model, clean_newdata, preprocess_new
 
 app = FastAPI()
 
+# This line defines a class named 'Property' which inherits from BaseModel.
+# BaseModel is a class provided by Pydantic, used here to define data models where the types of the attributes are validated.
+# In this context, it allows us to create a data model for 'Property' with type annotations, ensuring that instances of Property have attributes of correct types.
+# An object instance of this class when instantiated would look like Property(id=123, price=250000, property_type="House", subproperty_type="Villa", region="West", province="Province A", locality="Locality X", zip_code=12345, latitude=50.1234, longitude=4.5678, construction_year=1990, total_area_sqm=120.5, surface_land_sqm=200.0, nbr_frontages=2.0, nbr_bedrooms=3, equipped_kitchen="Installed", fl_furnished=0, fl_open_fire=1, fl_terrace=1, terrace_sqm=15.0, fl_garden=1, garden_sqm=100.0, fl_swimming_pool=0, fl_floodzone=0, state_building="Good", primary_energy_consumption_sqm=250.0, epc="B", heating_type="Gas", fl_double_glazing=1, cadastral_income=1500.0)
 class Property(BaseModel):
-    #Property model fields
-    id: int
-    price: int
-    property_type: str
-    subproperty_type: str
-    region: str
-    province: str
-    locality: str
-    zip_code: int
-    latitude: float
-    longitude: float
-    construction_year: float
-    total_area_sqm: float
-    surface_land_sqm: float
-    nbr_frontages: float
-    nbr_bedrooms: int
-    equipped_kitchen: str
-    fl_furnished: int
-    fl_open_fire: int
-    fl_terrace: int
-    terrace_sqm: float
-    fl_garden: int
-    garden_sqm: float
-    fl_swimming_pool: int
-    fl_floodzone: int
-    state_building: str
-    primary_energy_consumption_sqm: float
-    epc: str
-    heating_type: str
-    fl_double_glazing: int
-    cadastral_income: float
-
-   # this is how I should define all fields, providing a default value if needed:
-    #SurfaceOfGood: Optional[int] = None  # Defines an optional integer field for SurfaceOfGood, defaulting to None if not provided
+    #Property model fields with default values
+    id: Optional[int] = None
+    price: Optional[int] = None
+    property_type: str = Field(None, regex="^(HOUSE|APARTMENT)$")
+    subproperty_type: Optional[str] = None
+    region: Optional[str] = None
+    province: Optional[str] = None
+    locality: Optional[str] = None
+    zip_code: Optional[int] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    construction_year: Optional[float] = None
+    total_area_sqm: Optional[float] = None
+    surface_land_sqm: Optional[float] = None
+    nbr_frontages: Optional[float] = None
+    nbr_bedrooms: Optional[int] = None
+    equipped_kitchen: Optional[str] = None
+    fl_furnished: Optional[int] = None
+    fl_open_fire: Optional[int] = None
+    fl_terrace: Optional[int] = None
+    terrace_sqm: Optional[float] = None
+    fl_garden: Optional[int] = None
+    garden_sqm: Optional[float] = None
+    fl_swimming_pool: Optional[int] = None
+    fl_floodzone: Optional[int] = None
+    state_building: Optional[str] = None
+    primary_energy_consumption_sqm: Optional[float] = None
+    epc: Optional[str] = None
+    heating_type: Optional[str] = None
+    fl_double_glazing: Optional[int] = None
+    cadastral_income: Optional[float] = None
 
 # Set port to the env variable PORT to make it easy to choose the port on the server
 # If the Port env variable is not set, use port 8000
