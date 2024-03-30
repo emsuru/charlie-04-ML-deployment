@@ -138,7 +138,7 @@ if __name__ == "__main__":
     preprocessed_new_data = preprocess_newdata(cleaned_new_data, preprocessor_paths)
 
     # 3. Load the model
-    model_path = 'random_forest_model.pkl'
+    model_path = 'light_gbm_model.pkl'
     model = load_model(model_path)
 
     # 4. Make & save predictions

@@ -86,7 +86,7 @@ def predict(property: Property):
         }
         cleaned_data = clean_newdata(property.model_dump())
         preprocessed_data = preprocess_newdata(cleaned_data, preprocessor_paths)
-        model = load_model('random_forest_model.pkl')  # Adjust path as necessary
+        model = load_model('light_gbm_model.pkl')  # Adjust path as necessary
         predictions = predict_function(model, preprocessed_data)
         logging.info(f"Predictions type: {type(predictions)}, value: {predictions}")
         # Extract the first element from the numpy array and convert it to a native Python type (float).
