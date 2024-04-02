@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_URL = "https://charlie-04-ml-deployment.onrender.com//predict"
+API_URL = "https://charlie-04-ml-deployment.onrender.com/predict"
 
 st.title("Sale Price Predictor")
 
