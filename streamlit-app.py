@@ -52,8 +52,16 @@ if st.button("Predict Price"):
     # Update the payload with default values for optional fields
     payload.update(default_values)
 
+    # Print the URL and payload for debugging
+    print("Sending request to:", API_URL)
+    print("Payload:", payload)
+
     # Make a POST request to the FastAPI service
     response = requests.post(API_URL, json=payload)
+
+    # Print the status code and response for debugging
+    print("Status Code:", response.status_code)
+    print("Response:", response.text)
     
     if response.status_code == 200:
         prediction = response.json()["prediction"]
