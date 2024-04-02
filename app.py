@@ -92,8 +92,9 @@ def predict(property: Property):
         # Extract the first element from the numpy array and convert it to a native Python type (float).
         prediction_value = float(predictions[0])
         # save_predictions(predictions, 'path/to/save/predictions')  # Optionally save predictions if needed
-         # Now, safely pass this value to jsonable_encoder, though now it's not necessary, but for later if we need to return more than one value
-        json_compatible_predictions = jsonable_encoder({"prediction": prediction_value})
+        formatted_prediction = f"{prediction_value:,.2f} €"
+        # Now, safely pass this value to jsonable_encoder, though now it's not necessary, but for later if we need to return more than one value
+        json_compatible_predictions = jsonable_encoder({"prediction": formatted_prediction})
         # json_compatible_predictions = jsonable_encoder({"prediction": predictions})
         logging.info(f"JSON-compatible Predictions: {json_compatible_predictions}")
         return json_compatible_predictions
