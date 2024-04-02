@@ -54,22 +54,22 @@ if st.button("Predict Price"):
 
     # Define the expected order of fields
     expected_order = [
-        "property_type", "region", "total_area_sqm", "nbr_bedrooms",
-        "id", "price", "subproperty_type", "province", "locality",
+        "id", "price", "property_type", "subproperty_type", "region", "province", "locality",
         "zip_code", "latitude", "longitude", "construction_year",
-        "surface_land_sqm", "nbr_frontages", "equipped_kitchen",
+        "total_area_sqm", "surface_land_sqm", "nbr_frontages", "nbr_bedrooms",
+        "equipped_kitchen",
         "fl_furnished", "fl_open_fire", "fl_terrace", "terrace_sqm",
         "fl_garden", "garden_sqm", "fl_swimming_pool", "fl_floodzone",
         "state_building", "primary_energy_consumption_sqm", "epc",
         "heating_type", "fl_double_glazing", "cadastral_income"
     ]
-    
+
     # Reorder the payload according to the expected order
-    ordered_payload = {key: payload[key] for key in expected_order if key in payload}
+    ordered_payload = {key: payload.get(key) for key in expected_order}
     
     # Print the URL and payload for debugging
     print("Sending request to:", API_URL)
-    print("Payload:", payload)
+    print("Payload:", ordered_payload)
 
     # Make a POST request to the FastAPI service
     response = requests.post(API_URL, json=ordered_payload)
