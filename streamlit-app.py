@@ -52,12 +52,27 @@ if st.button("Predict Price"):
     # Update the payload with default values for optional fields
     payload.update(default_values)
 
+    # Define the expected order of fields
+    expected_order = [
+        "property_type", "region", "total_area_sqm", "nbr_bedrooms",
+        "id", "price", "subproperty_type", "province", "locality",
+        "zip_code", "latitude", "longitude", "construction_year",
+        "surface_land_sqm", "nbr_frontages", "equipped_kitchen",
+        "fl_furnished", "fl_open_fire", "fl_terrace", "terrace_sqm",
+        "fl_garden", "garden_sqm", "fl_swimming_pool", "fl_floodzone",
+        "state_building", "primary_energy_consumption_sqm", "epc",
+        "heating_type", "fl_double_glazing", "cadastral_income"
+    ]
+    
+    # Reorder the payload according to the expected order
+    ordered_payload = {key: payload[key] for key in expected_order if key in payload}
+    
     # Print the URL and payload for debugging
     print("Sending request to:", API_URL)
     print("Payload:", payload)
 
     # Make a POST request to the FastAPI service
-    response = requests.post(API_URL, json=payload)
+    response = requests.post(API_URL, json=ordered_payload)
 
     # Print the status code and response for debugging
     print("Status Code:", response.status_code)
