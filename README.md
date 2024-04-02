@@ -5,7 +5,12 @@
 ![render](https://img.shields.io/badge/Render-0.1.0-orange)
 
 This app deploys the Price Prediction ML model built [here](https://github.com/emsuru/charlie-03-ML-training).
-The model is containerized with Docker, exposed through a RESTful API with FastAPI and hosted on Render.
+
+The model is containerized with Docker and offered to:
+- **developers** via a RESTful API with FastAPI and hosted on Render here: https://charlie-04-ml-deployment.onrender.com/docs
+- **non-technical users** via a simple web app here: https://charlie-ml.streamlit.app/
+
+## Developer API 
 
 - **API endpoint**: https://charlie-04-ml-deployment.onrender.com/docs  Please note that I'm using the free hosting service from Render, which means it may take up to 1 minute or more for the page to load if it hasn't been called in a while. 
 
@@ -70,9 +75,10 @@ Scroll down to the bottom of the /docs page to find the API schema for `/propert
 
 ---
 
-# Extras
+## Web application
 
 For a non-technical user persona I have set up a small web app using Streamlit that is live here: 
-- https://charlie-ml.streamlit.app/
 
-but its status is currently in debugging mode (the prediction doesn't yet work. TO BE UPDATED)
+https://charlie-ml.streamlit.app/
+
+Please note that it may take a while to load. 
