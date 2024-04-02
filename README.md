@@ -1,4 +1,4 @@
-# Charlie Phase 04 ML model deployment
+# Immo Charlie Phase 04: Deployment
 
 ![docker](https://img.shields.io/badge/Docker-3.3.0-blue)
 ![fastapi](https://img.shields.io/badge/FastAPI-0.68.0-green)
@@ -7,17 +7,17 @@
 This app deploys the Price Prediction ML model built [here](https://github.com/emsuru/charlie-03-ML-training).
 The model is containerized with Docker, exposed through a RESTful API with FastAPI and hosted on Render.
 
-**API endpoint**: https://charlie-04-ml-deployment.onrender.com/docs  Please note that I'm using the free hosting service from Render, which means it may take up to 1 minute or more for the page to load if it hasn't been called in a while. 
+- **API endpoint**: https://charlie-04-ml-deployment.onrender.com/docs  Please note that I'm using the free hosting service from Render, which means it may take up to 1 minute or more for the page to load if it hasn't been called in a while. 
 
-**Method**: POST
+- **Method**: POST
 
-**Endpoint**: /predict
+- **Endpoint**: `/predict`
 
-**Request Body**: JSON format containing property details
+- **Request Body**: JSON format containing property details
 
-**Response**: JSON format with the predicted price
+- **Response**: JSON format with the predicted price
 
-Scroll down to the bottom of the /docs page to find the API schema for /property, with indication of optional/mandatory parameters and the required value types to be used.
+Scroll down to the bottom of the /docs page to find the API schema for `/property`, with indication of optional/mandatory parameters and the required value types to be used.
 
 ## Example Request:
 
@@ -65,43 +65,5 @@ Scroll down to the bottom of the /docs page to find the API schema for /property
 {
   "prediction": 345708.14
 }
-
-```
-
-Property Schema
-
-```
-
-Property
-id (integer | null)
-price (integer | null)
-property_type stringmatches ^(HOUSE|APARTMENT)$
-subproperty_type (string | null)
-region stringmatches ^(Flanders|Wallonia|Brussels-Capital)$
-province (string | null)
-locality (string | null)
-zip_code (integer | null)
-latitude (number | null)
-longitude (number | null)
-construction_year (number | null)
-total_area_sqm number(0, 501)
-surface_land_sqm (number | null)
-nbr_frontages (number | null)
-nbr_bedrooms integer[1, 7]
-equipped_kitchen (string | null)
-fl_furnished (integer | null)
-fl_open_fire (integer | null)
-fl_terrace (integer | null)
-terrace_sqm (number | null)
-fl_garden (integer | null)
-garden_sqm (number | null)
-fl_swimming_pool (integer | null)
-fl_floodzone (integer | null)
-state_building (string | null)
-primary_energy_consumption_sqm (number | null)
-epc (string | null)
-heating_type (string | null)
-fl_double_glazing (integer | null)
-cadastral_income (number | null)
 
 ```
