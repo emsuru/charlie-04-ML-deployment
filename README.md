@@ -67,3 +67,12 @@ Scroll down to the bottom of the /docs page to find the API schema for `/propert
 }
 
 ```
+
+---
+
+# Extras
+
+For a non-technical user persona I have set up a small web app using Streamlit that is live here: 
+- https://charlie-ml.streamlit.app/
+
+but its status is currently in debugging mode (the prediction doesn't yet work. TO BE UPDATED)
