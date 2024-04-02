@@ -3,13 +3,28 @@ import requests
 
 API_URL = "https://charlie-04-ml-deployment.onrender.com/predict"
 
-st.title("Sale Price Predictor")
+st.title("Charlie ML - Price Predictor")
+
+description = """
+This app gives an estimated price for residential properties in Belgium.
+The ML model behind it has been trained on a dataset of 70,000 real properties in Belgium.
+
+The properties used for training were listed on the real estate website immoweb.be in February 2024.
+
+Fill-in the form below to get a prediction.
+
+"""
+st.markdown(description)
 
 # mandatory input fields as per the model 
 property_type = st.selectbox("Property Type", ["HOUSE", "APARTMENT"])
+st.caption("Select the type of property you're interested in.")
 region = st.selectbox("Region", ["Flanders", "Wallonia", "Brussels-Capital"])
-total_area_sqm = st.number_input("Surface (in m2)", min_value=0, max_value=500, step=1)
+st.caption("Choose the region where the property is located.") 
+total_area_sqm = st.slider("Surface (in m2)", min_value=0, max_value=500, step=1)
+st.caption("Adjust the slider to the total area of the property in square meters.")
 nbr_bedrooms = st.number_input("Bedrooms", min_value=0, max_value=7, step=1)
+st.caption("Specify the number of bedrooms in the property, max 7.")
 
 # Optional fields - set default values
 default_values = {
@@ -84,4 +99,6 @@ if st.button("Predict Price"):
     else:
         st.error("Error in prediction")
 
-st.write("Made with ❤ by EmSuru")
+
+st.write("Made with ❤ by EmSuru.") 
+st.write("To view the source code, visit the creator's [GitHub profile.](https://github.com/emsuru)")
