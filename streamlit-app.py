@@ -100,5 +100,5 @@ if st.button("Predict Price"):
         st.error("Error in prediction")
 
 
-st.write("Made with ❤ by EmSuru.") 
+st.write("Made just for fun by EmSuru.") 
 st.write("To view the source code, visit the creator's [GitHub profile.](https://github.com/emsuru)")
